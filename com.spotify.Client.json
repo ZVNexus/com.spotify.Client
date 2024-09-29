@@ -218,9 +218,13 @@
                     "type": "script",
                     "dest-filename": "apply_extra",
                     "commands": [
-                        "unsquashfs -quiet -no-progress spotify.snap usr/bin usr/share/spotify",
-                        "mv squashfs-root/usr/* .",
-                        "rm -r spotify.snap squashfs-root share/spotify/apt-keys share/spotify/spotify.desktop"
+                        "bsdtar -xf spotify.deb",
+                        "rm -f spotify.deb",
+                        "tar xf data.tar.xz",
+                        "rm -f control.tar.xz data.tar.xz debian-binary",
+                        "mv usr/* .",
+                        "rmdir usr",
+                        "rm -r share/spotify/apt-keys share/spotify/spotify.desktop share/spotify/icons"
                     ]
                 },
                 {
@@ -253,19 +257,13 @@
                 },
                 {
                     "type": "extra-data",
-                    "filename": "spotify.snap",
+                    "filename": "spotify.deb",
                     "only-arches": [
                         "x86_64"
                     ],
-                    "url": "https://api.snapcraft.io/api/v1/snaps/download/pOBIoZ2LrCB3rDohMxoYGnbN14EHOgD7_79.snap",
-                    "sha256": "7f0ffdb73d0875f5dd9bb5a17fffc02945ed49a19f373cdf6b8d624c991a77c0",
-                    "size": 191000576,
-                    "x-checker-data": {
-                        "type": "snapcraft",
-                        "name": "spotify",
-                        "channel": "stable",
-                        "is-main-source": true
-                    }
+                    "url": "https://repository-origin.spotify.com/pool/non-free/s/spotify-client/spotify-client_1.2.47.364.gf06e5cee_amd64.deb",
+                    "sha256": "65405a1346884600e5a1a350bc0bcfb17f822432031d45ae11c3eeea3236c8fa",
+                    "size": 109100472
                 }
             ]
         }
